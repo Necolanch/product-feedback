@@ -1,2 +1,2 @@
 # product-feedback
-Product feedback application
+Product feedback front end app
