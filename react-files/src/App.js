@@ -3,7 +3,7 @@ import TitlePiece from "./components/TitlePiece";
 function App() {
   return (
     <div className="App">
-      <TitlePiece titleText="Hello World"></TitlePiece>
+      <TitlePiece titleText="Product Feedback"></TitlePiece>
     </div>
   );
 }
