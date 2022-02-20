@@ -13,7 +13,7 @@ const TitleBackground=styled.div`
 background: linear-gradient(45deg, #f12711, #f5af19);
 width:15%;
 border-radius:.5em;
-margin:5% 0 2% 5%;
+margin:5% 0 2% 15%;
 `;
 
 const TitleText=styled.h3`

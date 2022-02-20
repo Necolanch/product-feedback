@@ -12,7 +12,7 @@ background-color:white;
 width:15%;
 height:75%;
 border:none;
-border-radius:1em;
+border-radius:.5em;
 padding:.5em;
 `
 

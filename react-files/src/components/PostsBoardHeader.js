@@ -31,8 +31,8 @@ align-items:center;
 background-color:#58130A;
 width:42%;
 border-radius:.5em;
-padding:1em;
-margin-left:30%;
+padding:.5em 1em .5em 1em;
+margin-left:35%;
 margin-top:-8.75em;
 `
 
