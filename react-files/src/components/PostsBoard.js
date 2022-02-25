@@ -11,12 +11,13 @@ function PostsBoard() {
             const response = await fetch("https://jsonplaceholder.typicode.com/posts");
             const data = await response.json();
 
-            const [feedback] = data.map(feedback=>setFeedbackInfo({
-                id:`${feedback.id}`,
-                title:`${feedback.title}`
-            }));
-
-            console.log(feedback);
+            const feedback=data.map(fb=>{
+                return{
+                    id:fb.id,
+                    title:fb.title
+                }
+            })
+            setFeedbackInfo(feedback);
         }
 
         if({isLoaded}) {
@@ -27,7 +28,12 @@ function PostsBoard() {
     }, [isLoaded])
 
     return(
-        <Post key={feedbackInfo.id} data={feedbackInfo} title={feedbackInfo.title}></Post>
+    <div> {
+        feedbackInfo.map(feedback=>{
+            return(<Post key={feedback.id} data={feedback} title={feedback.title}></Post>)
+        })
+    }
+    </div>
     )
 
 }
