@@ -14,7 +14,8 @@ function PostsBoard() {
             const feedback=data.map(fb=>{
                 return{
                     id:fb.id,
-                    title:fb.title
+                    title:fb.title,
+                    body:fb.body
                 }
             })
             setFeedbackInfo(feedback);
@@ -30,7 +31,7 @@ function PostsBoard() {
     return(
     <div> {
         feedbackInfo.map(feedback=>{
-            return(<Post key={feedback.id} data={feedback} title={feedback.title}></Post>)
+            return(<Post key={feedback.id} data={feedback} title={feedback.title} body={feedback.body}></Post>)
         })
     }
     </div>
