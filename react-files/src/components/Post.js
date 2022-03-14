@@ -19,7 +19,7 @@ const PostContainer=styled.div`
 background-color:#F8F7F8;
 width:42%;
 border-radius:.5em;
-box-shadow:0 .1em .2em .02em rgba(0, 0, 0, 0.2);
+box-shadow:0 .1em .2em .02em rgba(0, 0, 0, 0.1);
 padding:.5em;
 margin: .5em 0 1em 35.5%;
 `
