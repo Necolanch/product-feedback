@@ -29,10 +29,10 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 background-color:#58130A;
-width:42%;
+width:45%;
 border-radius:.5em;
 padding:.5em 1em .5em 1em;
-margin-left:35%;
+margin-left:33%;
 margin-top:-8.75em;
 `
 

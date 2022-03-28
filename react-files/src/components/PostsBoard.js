@@ -15,7 +15,8 @@ function PostsBoard() {
                 return{
                     id:fb.id,
                     title:fb.title,
-                    body:fb.body
+                    body:fb.body,
+                    likes:fb.userId
                 }
             })
             setFeedbackInfo(feedback);
