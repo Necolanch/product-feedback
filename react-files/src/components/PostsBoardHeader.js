@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Button from "./Button";
 
 function PostsBoardHeader({sort}) {
-    const [sortState]=useState("Select sort");
+    const [sortState, setSortState]=useState("Select sort");
 
     return (
         <BoardHeader>
@@ -11,11 +11,11 @@ function PostsBoardHeader({sort}) {
             <PostSortLabel>Sort by:</PostSortLabel>
             <SortSelection>{sortState}</SortSelection>
             <PostSort value={sortState} onChange={e=>sort(e.target.value)}>
-                <option>Select sort</option>
-                <option>Most likes</option>
-                <option>Least likes</option>
-                <option>Most comments</option>
-                <option>Least comments</option>
+                <option onClick={e=>setSortState(e.target.value)}>Select sort</option>
+                <option onClick={e=>setSortState(e.target.value)}>Most likes</option>
+                <option onClick={e=>setSortState(e.target.value)}>Least likes</option>
+                <option onClick={e=>setSortState(e.target.value)}>Most comments</option>
+                <option onClick={e=>setSortState(e.target.value)}>Least comments</option>
             </PostSort>
             <Button btnText="Add"></Button>
         </BoardHeader>
