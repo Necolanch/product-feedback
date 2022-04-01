@@ -3,23 +3,39 @@ import styled from "styled-components";
 
 import {AiFillLike} from 'react-icons/ai'
 
+let likePress=0;
+let likePressed=false;
+
 const Post = props => {
     const [feedbackData]=useState(props.data);
     const [feedbackTitle]=useState(props.data.title);
     const [feedbackPost]=useState(props.data.body);
-    const [feedbackLikes]=useState(props.data.likes);
+    const [feedbackLikes, setFeedbackLikes]=useState(props.data.likes);
+
+    const addLike = () => {
+        likePress=likePress+1;
+
+        if (likePress%2===1) {
+            const newLikes = feedbackLikes + 1;
+            setFeedbackLikes(newLikes);
+            likePressed=true;
+        } else if (likePress%2===0) {
+            const decreaseLike = feedbackLikes - 1;
+            setFeedbackLikes(decreaseLike);
+            likePressed=false;
+        }
+    };
 
     return(
         <PostContainer>
         <UpvoteWrapper>
-        <Upvote/>
+        <Upvote onClick={addLike}/>
         <UpvoteCounter key={props.id} data={feedbackData}>{feedbackLikes}</UpvoteCounter>
         </UpvoteWrapper>
         <PostTitle key={props.id} data={feedbackData}>{feedbackTitle}</PostTitle>
         <PostBody key={props.id} data={feedbackData}>{feedbackPost}</PostBody>
         </PostContainer>
     )
-
     
 }
 const PostContainer=styled.div`
@@ -47,8 +63,9 @@ margin:-1.5em 0 0 0;
 `
 
 const Upvote = styled(AiFillLike)`
+fill:${likePressed ? "orange":"black"};
 &:hover {
-    fill:orange;
+    fill:${likePressed ? "black":"orange"};
     cursor:pointer;
 }
 `

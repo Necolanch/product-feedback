@@ -9,11 +9,10 @@ function PostsBoardHeader({sort}) {
         <BoardHeader>
             <BoardHeaderTitle>Feedback Posts</BoardHeaderTitle>
             <PostSortLabel>Sort by:</PostSortLabel>
-            <SortSelection>{sortState}</SortSelection>
             <PostSort value={sortState} onChange={e=>sort(e.target.value)}>
-                <option onClick={e=>setSortState(e.target.value)}>Select sort</option>
-                <option onClick={e=>setSortState(e.target.value)}>Most likes</option>
-                <option onClick={e=>setSortState(e.target.value)}>Least likes</option>
+                <option className="sortOption" onClick={e=>setSortState(e.target.value)}>Select sort</option>
+                <option className="sortOption" onClick={e=>setSortState(e.target.value)}>Most likes</option>
+                <option className="sortOption" onClick={e=>setSortState(e.target.value)}>Least likes</option>
             </PostSort>
             <Button btnText="Add"></Button>
         </BoardHeader>
@@ -37,20 +36,20 @@ color:white;
 `
 
 const PostSortLabel=styled.label`
-color:white;
-`
-
-const SortSelection=styled.p`
-color:white;
-margin-left:-23%;
+color:#E0DFE0;
+margin-right:-12%;
 `
 
 const PostSort=styled.select`
 color:white;
-background-color:white;
+font-size:1em;
+font-weight:700;
+background-color:#58130A;
 border:none;
-width:2%;
-margin-left:-22%;
+margin-right:22%;
+&:hover{
+    cursor:pointer;
+}
 `
 
 export default PostsBoardHeader;
