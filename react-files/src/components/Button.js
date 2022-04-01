@@ -14,6 +14,10 @@ height:75%;
 border:none;
 border-radius:.5em;
 padding:.5em;
+&:hover{
+    background-color:grey;
+    cursor:pointer;
+}
 `
 
 export default Button;

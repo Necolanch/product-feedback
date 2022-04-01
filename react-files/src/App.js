@@ -41,7 +41,7 @@ function App() {
         const sorted = [...feedbackData].sort((a,b)=> b.likes-a.likes);
         setFeedbackData(sorted);
       } else {
-        const defaultSort=[...feedbackData].sort((a,b)=>a.id-b.id);
+        const defaultSort=[...feedbackData].sort((a,b)=>a.likes-b.likes);
         setFeedbackData(defaultSort);
       };
     };
