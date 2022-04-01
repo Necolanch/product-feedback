@@ -14,8 +14,6 @@ function PostsBoardHeader({sort}) {
                 <option onClick={e=>setSortState(e.target.value)}>Select sort</option>
                 <option onClick={e=>setSortState(e.target.value)}>Most likes</option>
                 <option onClick={e=>setSortState(e.target.value)}>Least likes</option>
-                <option onClick={e=>setSortState(e.target.value)}>Most comments</option>
-                <option onClick={e=>setSortState(e.target.value)}>Least comments</option>
             </PostSort>
             <Button btnText="Add"></Button>
         </BoardHeader>

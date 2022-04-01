@@ -40,6 +40,9 @@ function App() {
         if(method === "Most likes") {
         const sorted = [...feedbackData].sort((a,b)=> b.likes-a.likes);
         setFeedbackData(sorted);
+      } else {
+        const defaultSort=[...feedbackData].sort((a,b)=>a.id-b.id);
+        setFeedbackData(defaultSort);
       };
     };
 

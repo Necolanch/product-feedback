@@ -1,47 +1,8 @@
 import React from "react";
-//import styled from "styled-components";
 
 import Post from "./Post";
 
 function PostsBoard({posts}) {
-//    const [feedbackData, setFeedbackData]= useState([]);
-//    const [isLoaded]=useState([{isLoaded:true}]);
-//    const [sortState, setSortState]=useState("Select sort");
-
-//    useEffect(()=>{
-//        async function getData() {
-//            const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-//            const data = await response.json();
-//
-//            const feedback=data.map(fb=>{
-//                return{
-//                    id:fb.id,
-//                    title:fb.title,
-//                    body:fb.body,
-//                    likes:fb.userId
-//                }
-//            })
-//            setFeedbackData(feedback);
-//        }
-//
-//        if({isLoaded}) {
-//            getData();
-//        } else {
-//            console.log("Cannot load");
-//        }
-//    }, [isLoaded])
-
-//    useEffect(()=> {
-//        const sortByLikes = method => {
-//            if(method === "Most likes") {
-//            const sorted = [...feedbackData].sort((a,b)=> b.likes-a.likes);
-//            setFeedbackData(sorted);
-//          };
-//        };
-//
-//        sortByLikes(sortState);
-//    }, [sortState])
-
     return(
     <div> {
         posts.map(feedback=>{
@@ -52,38 +13,5 @@ function PostsBoard({posts}) {
     )
 
 }
-
-//const BoardHeader = styled.div`
-//display:flex;
-//justify-content:space-between;
-//align-items:center;
-//background-color:#58130A;
-//width:45%;
-//border-radius:.5em;
-//padding:.5em 1em .5em 1em;
-//margin-left:33%;
-//margin-top:-8.75em;
-//`
-//
-//const BoardHeaderTitle=styled.p`
-//color:white;
-//`
-//
-//const PostSortLabel=styled.label`
-//color:white;
-//`
-//
-//const SortSelection=styled.p`
-//color:white;
-//margin-left:-23%;
-//`
-//
-//const PostSort=styled.select`
-//color:white;
-//background-color:white;
-//border:none;
-//width:2%;
-//margin-left:-22%;
-//`
 
 export {PostsBoard};
