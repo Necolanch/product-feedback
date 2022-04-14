@@ -33,8 +33,9 @@ height:2em;
 border:none;
 border-radius:.5em;
 padding:.5em;
+margin-right:-30em;
 &:hover{
-    background-color:grey;
+    background-color:#F5AF19;
     cursor:pointer;
 }
 `

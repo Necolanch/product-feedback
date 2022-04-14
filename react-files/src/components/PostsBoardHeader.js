@@ -12,15 +12,21 @@ function PostsBoardHeader({ sort }) {
   const postingStatus = (e) =>{
     e.preventDefault();
     setPosting(true);
-    console.log(posting);
     const seeForm = {postDisplay:{visibility:"visible"}}
     Object.assign(styles, seeForm);
+  }
+
+  const closePostForm = (e)=>{
+    e.preventDefault();
+    setPosting(false);
+    const exitForm = {postDisplay:{visibility:"hidden"}};
+    Object.assign(styles, exitForm);
   }
 
   return (
     <div>
       <div style={styles.postDisplay}>
-        <PostForm></PostForm>
+        <PostForm closeForm={closePostForm}></PostForm>
       </div>
       <BoardHeader>
         <BoardHeaderTitle>Feedback Posts</BoardHeaderTitle>
