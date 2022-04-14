@@ -1,9 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-const Button = props => {
+const Button = ({btnText, handleForm}) => {
     return (
-        <AddButton>{props.btnText}</AddButton>
+        <AddButton onClick={handleForm}>{btnText}</AddButton>
+    )
+}
+
+const PostButton = props =>{
+    return(
+        <PostButtonStyles>{props.btnText}</PostButtonStyles>
     )
 }
 
@@ -20,4 +26,17 @@ padding:.5em;
 }
 `
 
-export default Button;
+const PostButtonStyles = styled.button`
+background-color:white;
+width:15%;
+height:2em;
+border:none;
+border-radius:.5em;
+padding:.5em;
+&:hover{
+    background-color:grey;
+    cursor:pointer;
+}
+`
+
+export {Button, PostButton};
