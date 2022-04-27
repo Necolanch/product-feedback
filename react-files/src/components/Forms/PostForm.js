@@ -8,11 +8,8 @@ import { RiCloseFill } from "react-icons/ri";
 import { PostContext } from "../../contexts/posts";
 
 
-function PostForm({closeForm}) {
-  const {feedbackData} = useContext(PostContext);
-  const {setFeedbackData}=useContext(PostContext);
-
-  //const [postList, setPostList]=useState(feedbackData);
+function PostForm() {
+  const {feedbackData, setFeedbackData, closePostForm} = useContext(PostContext);
 
   const titleRef = useRef(null);
   const bodyRef=useRef(null);
@@ -28,13 +25,13 @@ function PostForm({closeForm}) {
       likes:0
     }
     setFeedbackData([newPost, ...feedbackData]);
-    console.log(feedbackData);
+    closePostForm(e);
   }
 
   return (
     <PostFormBackground>
       <PostFormContainer>
-        <Close onClick={closeForm}/>
+        <Close onClick={closePostForm}/>
         <PostFormTitle>Give Feedback</PostFormTitle>
         <PostFormTitleInput ref={titleRef} placeholder="Title"></PostFormTitleInput>
         <PostFormBody ref={bodyRef} placeholder="Feedback"></PostFormBody>

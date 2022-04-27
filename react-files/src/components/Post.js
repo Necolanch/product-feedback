@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 
-import {AiFillLike} from 'react-icons/ai'
+import {AiFillLike, AiOutlineEdit, AiFillDelete} from 'react-icons/ai'
 
 const Post = props => {
     const [feedbackData]=useState(props.data);
@@ -35,7 +35,6 @@ const Post = props => {
         <PostBody key={props.id} data={feedbackData}>{feedbackPost}</PostBody>
         </PostContainer>
     )
-    
 }
 
 const MyPost = props => {
@@ -66,12 +65,25 @@ const MyPost = props => {
         <Upvote like={likePressed.toString()} onClick={addLike}/>
         <UpvoteCounter key={props.id} data={feedbackData}>{feedbackLikes}</UpvoteCounter>
         </UpvoteWrapper>
+        <div style={styles.iconWrapper}>
+            <EditWrapper>
+                <Edit></Edit>
+            </EditWrapper>
+            <DeleteWrapper>
+                <Delete></Delete>
+            </DeleteWrapper>
+        </div>
         <PostTitle key={props.id} data={feedbackData}>{feedbackTitle}</PostTitle>
         <PostBody key={props.id} data={feedbackData}>{feedbackPost}</PostBody>
         </PostContainer>
     )
-    
 }
+const styles = {
+    iconWrapper:{
+        "display":"flex"
+    }
+}
+
 const PostContainer=styled.div`
 background-color:#F8F7F8;
 width:41.90%;
@@ -102,13 +114,34 @@ fill:${props=> props.like===`false` ? `black`:`orange`};
     fill:${props=> props.like===`false` ? `orange`:`black`};
     cursor:pointer;
 }
-
 `
 
 const UpvoteCounter=styled.span`
 position:relative;
 top:4em;
 left:.75em;
+`
+
+const EditWrapper = styled.div`
+margin:2% 0 -2% 90%;
+`
+
+const Edit = styled(AiOutlineEdit)`
+&:hover{
+    fill:orange;
+    cursor:pointer;
+}
+`
+
+const DeleteWrapper = styled.div`
+margin:2% 0 -2% 3%;
+`
+
+const Delete = styled(AiFillDelete)`
+&:hover{
+    fill:orange;
+    cursor:pointer;
+}
 `
 
 export {Post, MyPost};
