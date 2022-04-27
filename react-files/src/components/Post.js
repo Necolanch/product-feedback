@@ -37,6 +37,41 @@ const Post = props => {
     )
     
 }
+
+const MyPost = props => {
+    const [feedbackData]=useState(props.data);
+    const [feedbackTitle]=useState(props.data.title);
+    const [feedbackPost]=useState(props.data.body);
+    const [feedbackLikes, setFeedbackLikes]=useState(props.data.likes);
+    
+    const [likePress, setLikePress]=useState(0);
+    const [likePressed, setLikePressed]=useState(false);
+    const addLike = () => {
+        if (likePress===0) {
+            const newLikes = feedbackLikes + 1;
+            setFeedbackLikes(newLikes);
+            setLikePressed(true)
+            setLikePress(1)
+        } else if (likePress===1) {
+            const decreaseLike = feedbackLikes - 1;
+            setFeedbackLikes(decreaseLike);
+            setLikePressed(false);
+            setLikePress(0);
+        }
+    };
+
+    return(
+        <PostContainer>
+        <UpvoteWrapper>
+        <Upvote like={likePressed.toString()} onClick={addLike}/>
+        <UpvoteCounter key={props.id} data={feedbackData}>{feedbackLikes}</UpvoteCounter>
+        </UpvoteWrapper>
+        <PostTitle key={props.id} data={feedbackData}>{feedbackTitle}</PostTitle>
+        <PostBody key={props.id} data={feedbackData}>{feedbackPost}</PostBody>
+        </PostContainer>
+    )
+    
+}
 const PostContainer=styled.div`
 background-color:#F8F7F8;
 width:41.90%;
@@ -76,4 +111,4 @@ top:4em;
 left:.75em;
 `
 
-export default Post;
+export {Post, MyPost};

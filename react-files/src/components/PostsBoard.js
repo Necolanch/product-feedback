@@ -1,11 +1,17 @@
-import React from "react";
+import React, {useContext} from "react";
+import { PostContext } from "../contexts/posts";
 
-import Post from "./Post";
+import {Post, MyPost} from "./Post";
 
-function PostsBoard({posts}) {
+function PostsBoard() {
+    const {feedbackData} = useContext(PostContext);
+
     return(
     <div> {
-        posts.map(feedback=>{
+        feedbackData.map(feedback=>{
+                if (feedback.likes===0) {
+                    return <MyPost key={feedback.id} data={feedback} title={feedback.title} body={feedback.body}></MyPost>
+                }
             return(<Post key={feedback.id} data={feedback} title={feedback.title} body={feedback.body}></Post>)
         })
     }

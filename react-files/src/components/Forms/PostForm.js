@@ -1,19 +1,44 @@
-import React from "react";
+import React, { useRef, useContext} from "react";
 import styled from "styled-components";
+import { v4 as uuidv4 } from "uuid";
 
 import {PostButton} from "../Button";
 import { RiCloseFill } from "react-icons/ri";
 
+import { PostContext } from "../../contexts/posts";
+
 
 function PostForm({closeForm}) {
+  const {feedbackData} = useContext(PostContext);
+  const {setFeedbackData}=useContext(PostContext);
+
+  //const [postList, setPostList]=useState(feedbackData);
+
+  const titleRef = useRef(null);
+  const bodyRef=useRef(null);
+
+  const addPost = (e) => {
+    e.preventDefault();
+    const titleValue = titleRef.current.value;
+    const bodyValue = bodyRef.current.value;
+    const newPost={
+      id:uuidv4(),
+      title:titleValue,
+      body:bodyValue,
+      likes:0
+    }
+    setFeedbackData([newPost, ...feedbackData]);
+    console.log(feedbackData);
+  }
+
   return (
     <PostFormBackground>
       <PostFormContainer>
         <Close onClick={closeForm}/>
         <PostFormTitle>Give Feedback</PostFormTitle>
-        <PostFormTitleInput placeholder="Title"></PostFormTitleInput>
-        <PostFormBody placeholder="Feedback"></PostFormBody>
-        <PostButton btnText="Post"></PostButton>
+        <PostFormTitleInput ref={titleRef} placeholder="Title"></PostFormTitleInput>
+        <PostFormBody ref={bodyRef} placeholder="Feedback"></PostFormBody>
+        <PostButton btnText="Post" addPost={addPost}></PostButton>
       </PostFormContainer>
     </PostFormBackground>
   );

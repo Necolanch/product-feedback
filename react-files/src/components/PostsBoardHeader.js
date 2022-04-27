@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 
 import {Button} from "./Button";
 import {PostForm} from "./Forms/PostForm";
 
+import { PostContext } from "../contexts/posts";
+
 function PostsBoardHeader({ sort }) {
+  const {setSort} = useContext(PostContext);
+
   const [sortState, setSortState] = useState("Select sort");
 
   const [posting, setPosting] = useState(false);
@@ -31,7 +35,7 @@ function PostsBoardHeader({ sort }) {
       <BoardHeader>
         <BoardHeaderTitle>Feedback Posts</BoardHeaderTitle>
         <PostSortLabel>Sort by:</PostSortLabel>
-        <PostSort value={sortState} onChange={(e) => sort(e.target.value)}>
+        <PostSort value={sortState} onChange={(e) => setSort(e.target.value)}>
           <option className="sortOption" onClick={(e) => setSortState(e.target.value)}>
             Select sort
           </option>
