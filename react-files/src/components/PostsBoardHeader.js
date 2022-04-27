@@ -7,30 +7,14 @@ import {PostForm} from "./Forms/PostForm";
 import { PostContext } from "../contexts/posts";
 
 function PostsBoardHeader({ sort }) {
-  const {setSort} = useContext(PostContext);
+  const {setSort, styles} = useContext(PostContext);
 
   const [sortState, setSortState] = useState("Select sort");
-
-  const [posting, setPosting] = useState(false);
-
-  const postingStatus = (e) =>{
-    e.preventDefault();
-    setPosting(true);
-    const seeForm = {postDisplay:{visibility:"visible"}}
-    Object.assign(styles, seeForm);
-  }
-
-  const closePostForm = (e)=>{
-    e.preventDefault();
-    setPosting(false);
-    const exitForm = {postDisplay:{visibility:"hidden"}};
-    Object.assign(styles, exitForm);
-  }
 
   return (
     <div>
       <div style={styles.postDisplay}>
-        <PostForm closeForm={closePostForm}></PostForm>
+        <PostForm></PostForm>
       </div>
       <BoardHeader>
         <BoardHeaderTitle>Feedback Posts</BoardHeaderTitle>
@@ -46,7 +30,7 @@ function PostsBoardHeader({ sort }) {
             Least likes
           </option>
         </PostSort>
-        <Button handleForm={postingStatus} btnText="Add"></Button>
+        <Button btnText="Add"></Button>
       </BoardHeader>
     </div>
   );
@@ -84,11 +68,5 @@ const PostSort = styled.select`
     cursor: pointer;
   }
 `;
-
-let styles = {
-  postDisplay:{
-    visibility:"hidden",
-  }
-}
 
 export default PostsBoardHeader;

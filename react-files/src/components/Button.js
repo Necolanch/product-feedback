@@ -1,15 +1,19 @@
-import React from "react";
+import React, {useContext} from "react";
 import styled from "styled-components";
 
-const Button = ({btnText, handleForm}) => {
+import { PostContext } from "../contexts/posts";
+
+const Button = ({btnText}) => {
+    const {postingStatus} = useContext(PostContext);
+
     return (
-        <AddButton onClick={handleForm}>{btnText}</AddButton>
+        <AddButton onClick={postingStatus}>{btnText}</AddButton>
     )
 }
 
 const PostButton = ({btnText, addPost}) =>{
     return(
-        <PostButtonStyles onClick={addPost}>{btnText}</PostButtonStyles>
+        <PostButtonStyles type="submit" onClick={addPost}>{btnText}</PostButtonStyles>
     )
 }
 

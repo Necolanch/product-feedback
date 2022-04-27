@@ -43,9 +43,29 @@ const [sort, setSort]=useState("Select sort");
     sortByLikes(sort);
   }, [sort])
 
+  const [posting, setPosting] = useState(false);
+
+  const [styles, setStyles]=useState({postDisplay:{visibility:"hidden"}})
+
+  const postingStatus = (e) =>{
+    e.preventDefault();
+    setPosting(true);
+    setStyles({postDisplay:{visibility:"visible"}});
+  }
+
+  const closePostForm = (e)=>{
+    e.preventDefault();
+    setPosting(false);
+    setStyles({postDisplay:{visibility:"hidden"}});
+  }
+
   return {
       setSort,
-      feedbackData, setFeedbackData
+      feedbackData,
+      setFeedbackData,
+      postingStatus,
+      closePostForm,
+      styles
   }
 }
 
