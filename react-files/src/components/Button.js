@@ -7,9 +7,9 @@ const Button = ({btnText, handleForm}) => {
     )
 }
 
-const PostButton = props =>{
+const PostButton = ({btnText, addPost}) =>{
     return(
-        <PostButtonStyles>{props.btnText}</PostButtonStyles>
+        <PostButtonStyles onClick={addPost}>{btnText}</PostButtonStyles>
     )
 }
 
