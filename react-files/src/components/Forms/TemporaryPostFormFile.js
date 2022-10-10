@@ -11,7 +11,7 @@ import { PostContext } from "../../contexts/posts";
 // Global Variables
 let newPost = null;
 
-// Component Logi
+// Component Logic
 const PostForm = () => {
   const {feedbackData, setFeedbackData, closePostForm, sort} = useContext(PostContext);
 
@@ -19,12 +19,16 @@ const PostForm = () => {
   const bodyRef=useRef(null);
 
   const addPost = (e) => {
+    // Prevent Unintended Component Default Actions
     e.preventDefault();
+
+    // Set values to user input
     const titleValue = titleRef.current.value;
     console.log(`Title Pre Edit:${titleValue}`);
     const bodyValue = bodyRef.current.value;
     console.log(`Body Pre Edit:${bodyValue}`);
 
+    // Populate New Post with input
     newPost={
       id:uuidv4(),
       title:titleValue,
@@ -37,6 +41,8 @@ const PostForm = () => {
     if (sort === "Most likes") {
       setFeedbackData([...feedbackData, newPost]);
     } else{setFeedbackData([newPost, ...feedbackData])};
+
+    // Close Out Form
     closePostForm(e);
   }
 
@@ -54,25 +60,37 @@ const PostForm = () => {
 }
 
 const EditPostForm = () => {
-  const {feedbackData, setFeedbackData, closePostForm, editPostId, setEdited} = useContext(PostContext);
+  const {feedbackData, setFeedbackData, closePostForm, editPostId} = useContext(PostContext);
 
   const editTitleRef = useRef(null);
   const editBodyRef=useRef(null);
-  
   const editPost = (e) => {
+    // Prevent Unintended Component Default Actions
     e.preventDefault();
-    setEdited(true);
+
+    // Set values to user input
     const editTitleValue = editTitleRef.current.value;
     const editBodyValue = editBodyRef.current.value;
-    const newDataMap = feedbackData.map((data)=>{
+
+    // Populate Existing Post with input
+    const newDataMap = feedbackData.map(data=>{
       if (data.id===editPostId) {
-        data.title=editTitleValue;
-        data.body=editBodyValue;
+        return {
+          id:editPostId,
+          title:editTitleValue,
+          body:editBodyValue,
+          likes:data.likes
+        }
       }
-      return data;
-    })
+      return data
+    });
+
+    // Log Changes to Post
+    console.log(`Title Post Edit:${editTitleValue}`);
+    console.log(`Body Post Edit:${editBodyValue}`);
+
+    // Set any changes to individual post feedback
     setFeedbackData([...newDataMap]);
-    closePostForm(e);
   }
 
   return (
@@ -87,6 +105,7 @@ const EditPostForm = () => {
     </PostFormBackground>
   );
 }
+
 
 // Styled Components
 const PostFormBackground = styled.div`

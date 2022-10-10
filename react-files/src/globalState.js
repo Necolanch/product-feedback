@@ -2,7 +2,7 @@ import {useState, useEffect} from "react";
 
 const GlobalState = () =>{
     const [feedbackData, setFeedbackData]= useState([]);
-    const [isLoaded]=useState([{isLoaded:true}]);
+    const [isLoaded, setIsLoaded]=useState([{isLoaded:false}]);
 
   useEffect(()=>{
     const getData = async()=> {
@@ -25,6 +25,8 @@ const GlobalState = () =>{
     } else {
         console.log("Cannot load");
     }
+
+    return ()=>{setIsLoaded([{isLoaded:true}])}
 }, [isLoaded])
 
 const [sort, setSort]=useState("Select sort");
@@ -45,18 +47,30 @@ const [sort, setSort]=useState("Select sort");
 
   const [posting, setPosting] = useState(false);
 
-  const [styles, setStyles]=useState({postDisplay:{visibility:"hidden"}})
+  const [styles, setStyles]=useState({postDisplay:{visibility:"hidden"}, editPostDisplay:{visibility:"hidden"}})
 
   const postingStatus = (e) =>{
     e.preventDefault();
     setPosting(true);
-    setStyles({postDisplay:{visibility:"visible"}});
+    setStyles({postDisplay:{visibility:"visible"}, editPostDisplay:{visibility:"hidden"}});
+  }
+
+  const [editPostId, setEditPostId]=useState("");
+  const [originalLikes, setOriginalLikes]=useState("");
+  const [edited, setEdited]=useState(false);
+
+  const editPostStatus = (e, id, likes) => {
+    e.preventDefault();
+    setPosting(true);
+    setEditPostId(id);
+    setOriginalLikes(likes);
+    setStyles({postDisplay:{visibility:"hidden"}, editPostDisplay:{visibility:"visible"}})
   }
 
   const closePostForm = (e)=>{
     e.preventDefault();
     setPosting(false);
-    setStyles({postDisplay:{visibility:"hidden"}});
+    setStyles({postDisplay:{visibility:"hidden"}, editPostDisplay:{visibility:"hidden"}});
   }
 
   return {
@@ -65,7 +79,12 @@ const [sort, setSort]=useState("Select sort");
       setFeedbackData,
       postingStatus,
       closePostForm,
-      styles
+      styles,
+      sort,
+      editPostStatus,
+      editPostId,
+      originalLikes,
+      edited, setEdited
   }
 }
 

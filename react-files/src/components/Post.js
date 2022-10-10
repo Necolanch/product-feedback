@@ -1,16 +1,27 @@
-import React, {useState} from "react";
+// Imports
+import React, {useState, useContext, useEffect} from "react";
 import styled from "styled-components";
+
+import { PostContext } from "../contexts/posts";
 
 import {AiFillLike, AiOutlineEdit, AiFillDelete} from 'react-icons/ai'
 
+// Component Logic
 const Post = props => {
+
     const [feedbackData]=useState(props.data);
     const [feedbackTitle]=useState(props.data.title);
     const [feedbackPost]=useState(props.data.body);
+
     const [feedbackLikes, setFeedbackLikes]=useState(props.data.likes);
     
     const [likePress, setLikePress]=useState(0);
+
+    //! Rename to isLikePressed !//
     const [likePressed, setLikePressed]=useState(false);
+    
+    //const [isLiked, setIsLiked] = useState(false);
+
     const addLike = () => {
         if (likePress===0) {
             const newLikes = feedbackLikes + 1;
@@ -25,23 +36,41 @@ const Post = props => {
         }
     };
 
+    //! Consider 
+    //const incrementLikeCounter = () =>{
+    //    if(isLiked){
+    //        setIsLiked(false)
+    //        setFeedbackLikes(feedbackLikes+1);
+    //    }
+    //    else{
+
+    //    }
+    //};
     return(
         <PostContainer>
-        <UpvoteWrapper>
-        <Upvote like={likePressed.toString()} onClick={addLike}/>
-        <UpvoteCounter key={props.id} data={feedbackData}>{feedbackLikes}</UpvoteCounter>
-        </UpvoteWrapper>
-        <PostTitle key={props.id} data={feedbackData}>{feedbackTitle}</PostTitle>
-        <PostBody key={props.id} data={feedbackData}>{feedbackPost}</PostBody>
+            <UpvoteWrapper>
+                <Upvote like={likePressed.toString()} onClick={addLike}/>
+                <UpvoteCounter key={props.id} data={feedbackData}>{feedbackLikes}</UpvoteCounter>
+            </UpvoteWrapper>
+            <PostTitle key={props.id} data={feedbackData}>{feedbackTitle}</PostTitle>
+            <PostBody key={props.id} data={feedbackData}>{feedbackPost}</PostBody>
         </PostContainer>
     )
 }
 
 const MyPost = props => {
-    const [feedbackData]=useState(props.data);
-    const [feedbackTitle]=useState(props.data.title);
-    const [feedbackPost]=useState(props.data.body);
+    const {editPostStatus, feedbackData, setFeedbackData} = useContext(PostContext);
+
+    const [feedback]=useState(props.data);
+    const [feedbackTitle, setFeedbackTitle]=useState(props.data.title);
+    const [feedbackPost, setFeedbackPost]=useState(props.data.body);
     const [feedbackLikes, setFeedbackLikes]=useState(props.data.likes);
+    const [feedbackId]=useState(props.data.id);
+
+    useEffect(()=>{
+        setFeedbackTitle(props.data.title);
+        setFeedbackPost(props.data.body);
+    }, [props])
     
     const [likePress, setLikePress]=useState(0);
     const [likePressed, setLikePressed]=useState(false);
@@ -49,8 +78,8 @@ const MyPost = props => {
         if (likePress===0) {
             const newLikes = feedbackLikes + 1;
             setFeedbackLikes(newLikes);
-            setLikePressed(true)
-            setLikePress(1)
+            setLikePressed(true);
+            setLikePress(1);
         } else if (likePress===1) {
             const decreaseLike = feedbackLikes - 1;
             setFeedbackLikes(decreaseLike);
@@ -59,31 +88,59 @@ const MyPost = props => {
         }
     };
 
+    const deletePost = (id) =>{
+        setFeedbackData(feedbackData.filter(post => post.id !== id))
+    }
+
+    // styling
+    const EditWrapper = styled.div`
+    margin:2% 0 -2% 90%;
+    `
+
+    const Edit = styled(AiOutlineEdit)`
+    &:hover{
+        fill:orange;
+        cursor:pointer;
+    }
+    `
+    const DeleteWrapper = styled.div`
+    margin:2% 0 -2% 3%;
+    `
+    
+    const Delete = styled(AiFillDelete)`
+    &:hover{
+        fill:orange;
+        cursor:pointer;
+    }
+    `
     return(
         <PostContainer>
         <UpvoteWrapper>
         <Upvote like={likePressed.toString()} onClick={addLike}/>
-        <UpvoteCounter key={props.id} data={feedbackData}>{feedbackLikes}</UpvoteCounter>
+        <UpvoteCounter key={props.id} data={feedback}>{feedbackLikes}</UpvoteCounter>
         </UpvoteWrapper>
         <div style={styles.iconWrapper}>
             <EditWrapper>
-                <Edit></Edit>
+                <Edit className="edit" onClick={(e)=>editPostStatus(e, feedbackId, feedbackLikes)}></Edit>
             </EditWrapper>
             <DeleteWrapper>
-                <Delete></Delete>
+                <Delete onClick={()=>deletePost(feedbackId)}></Delete>
             </DeleteWrapper>
         </div>
-        <PostTitle key={props.id} data={feedbackData}>{feedbackTitle}</PostTitle>
-        <PostBody key={props.id} data={feedbackData}>{feedbackPost}</PostBody>
+        <PostTitle key={props.id} data={feedback}>{feedbackTitle}</PostTitle>
+        <PostBody key={props.id} data={feedback}>{feedbackPost}</PostBody>
         </PostContainer>
     )
 }
+
+// Global Styling
 const styles = {
     iconWrapper:{
         "display":"flex"
     }
 }
 
+// Posts Styling
 const PostContainer=styled.div`
 background-color:#F8F7F8;
 width:41.90%;
@@ -101,6 +158,7 @@ const PostBody=styled.p`
 font-size:.85em;
 `
 
+// Upvote Styling
 const UpvoteWrapper=styled.div`
 margin:-1.5em 0 0 0;
 > * {
@@ -120,28 +178,6 @@ const UpvoteCounter=styled.span`
 position:relative;
 top:4em;
 left:.75em;
-`
-
-const EditWrapper = styled.div`
-margin:2% 0 -2% 90%;
-`
-
-const Edit = styled(AiOutlineEdit)`
-&:hover{
-    fill:orange;
-    cursor:pointer;
-}
-`
-
-const DeleteWrapper = styled.div`
-margin:2% 0 -2% 3%;
-`
-
-const Delete = styled(AiFillDelete)`
-&:hover{
-    fill:orange;
-    cursor:pointer;
-}
 `
 
 export {Post, MyPost};
