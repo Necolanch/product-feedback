@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { PostContext } from "../contexts/posts";
 
+//Initiate Add Post Form from Posts Header
 const Button = ({btnText}) => {
     const {postingStatus} = useContext(PostContext);
 
@@ -11,12 +12,22 @@ const Button = ({btnText}) => {
     )
 }
 
+//! Potentially Rename to 'AddPostsButton'? !//
+//Adds Post to PostBoard
 const PostButton = ({btnText, addPost}) =>{
     return(
         <PostButtonStyles type="submit" onClick={addPost}>{btnText}</PostButtonStyles>
     )
 }
 
+//Edits Post from PostsBoard
+const EditPostButton = ({btnText, editPost}) =>{
+    return(
+        <PostButtonStyles type="submit" onClick={editPost}>{btnText}</PostButtonStyles>
+    )
+}
+
+// Styling
 const AddButton = styled.button`
 background-color:white;
 width:15%;
@@ -44,4 +55,4 @@ margin-right:-30em;
 }
 `
 
-export {Button, PostButton};
+export {Button, PostButton, EditPostButton};

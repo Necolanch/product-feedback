@@ -2,11 +2,11 @@ import React, { useState, useContext } from "react";
 import styled from "styled-components";
 
 import {Button} from "./Button";
-import {PostForm} from "./Forms/PostForm";
+import {PostForm, EditPostForm} from "./Forms/PostForm";
 
 import { PostContext } from "../contexts/posts";
 
-function PostsBoardHeader({ sort }) {
+function PostsBoardHeader() {
   const {setSort, styles} = useContext(PostContext);
 
   const [sortState, setSortState] = useState("Select sort");
@@ -15,6 +15,9 @@ function PostsBoardHeader({ sort }) {
     <div>
       <div style={styles.postDisplay}>
         <PostForm></PostForm>
+      </div>
+      <div style={styles.editPostDisplay}>
+        <EditPostForm></EditPostForm>
       </div>
       <BoardHeader>
         <BoardHeaderTitle>Feedback Posts</BoardHeaderTitle>

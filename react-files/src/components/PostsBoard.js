@@ -1,10 +1,10 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import { PostContext } from "../contexts/posts";
 
 import {Post, MyPost} from "./Post";
 
 function PostsBoard() {
-    const {feedbackData} = useContext(PostContext);
+    const {feedbackData, setFeedbackData} = useContext(PostContext);
 
     return(
     <div> {
@@ -16,8 +16,7 @@ function PostsBoard() {
         })
     }
     </div>
-    )
-
+    );
 }
 
 export {PostsBoard};
