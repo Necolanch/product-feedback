@@ -21,9 +21,7 @@ const PostForm = () => {
   const addPost = (e) => {
     e.preventDefault();
     const titleValue = titleRef.current.value;
-    console.log(`Title Pre Edit:${titleValue}`);
     const bodyValue = bodyRef.current.value;
-    console.log(`Body Pre Edit:${bodyValue}`);
 
     newPost={
       id:uuidv4(),
@@ -31,24 +29,24 @@ const PostForm = () => {
       body:bodyValue,
       likes:0
     }
-    //if (titleValue===null || bodyValue===null) {
-    //  
-    //}
     if (sort === "Most likes") {
       setFeedbackData([...feedbackData, newPost]);
     } else{setFeedbackData([newPost, ...feedbackData])};
+    bodyRef.current.value = "";
+    titleRef.current.value = "";
     closePostForm(e);
   }
 
   return (
     <PostFormBackground>
-      <PostFormContainer>
+      <PostFormContainer onSubmit={(e)=>addPost(e)}>
         <Close onClick={closePostForm}/>
         <PostFormTitle>Give Feedback</PostFormTitle>
-        <PostFormTitleInput ref={titleRef} placeholder="Title"></PostFormTitleInput>
-        <PostFormBody ref={bodyRef} placeholder="Feedback"></PostFormBody>
-        <PostButton btnText="Post" addPost={addPost}></PostButton>
+        <PostFormTitleInput className="title" ref={titleRef} placeholder="Title" required/>
+        <PostFormBody className="body" ref={bodyRef} placeholder="Feedback" required></PostFormBody>
+        <PostButton btnText="Post"></PostButton>
       </PostFormContainer>
+      <Error className="error">Please fill out both forms</Error>
     </PostFormBackground>
   );
 }
@@ -77,12 +75,12 @@ const EditPostForm = () => {
 
   return (
     <PostFormBackground>
-      <PostFormContainer>
+      <PostFormContainer onSubmit={e=>editPost(e)}>
         <Close onClick={closePostForm}/>
         <PostFormTitle>Edit Feedback</PostFormTitle>
-        <EditPostFormTitleInput ref={editTitleRef} placeholder="Title"></EditPostFormTitleInput>
-        <EditPostFormBody ref={editBodyRef} placeholder="Feedback"></EditPostFormBody>
-        <EditPostButton btnText="Edit" editPost={editPost}></EditPostButton>
+        <EditPostFormTitleInput ref={editTitleRef} placeholder="Title" required></EditPostFormTitleInput>
+        <EditPostFormBody ref={editBodyRef} placeholder="Feedback" required></EditPostFormBody>
+        <EditPostButton btnText="Edit"></EditPostButton>
       </PostFormContainer>
     </PostFormBackground>
   );
@@ -169,6 +167,12 @@ const EditPostFormBody = styled.textarea`
   resize:none;
   outline:none;
 `;
+
+const Error = styled.p`
+color:red;
+text-align:center;
+visibility:hidden;
+`
 
 const Close = styled(RiCloseFill)`
 position:relative;
