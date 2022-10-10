@@ -14,16 +14,16 @@ const Button = ({btnText}) => {
 
 //! Potentially Rename to 'AddPostsButton'? !//
 //Adds Post to PostBoard
-const PostButton = ({btnText, addPost}) =>{
+const PostButton = ({btnText}) =>{
     return(
-        <PostButtonStyles type="submit" onClick={addPost}>{btnText}</PostButtonStyles>
+        <PostButtonStyles type="submit">{btnText}</PostButtonStyles>
     )
 }
 
 //Edits Post from PostsBoard
-const EditPostButton = ({btnText, editPost}) =>{
+const EditPostButton = ({btnText}) =>{
     return(
-        <PostButtonStyles type="submit" onClick={editPost}>{btnText}</PostButtonStyles>
+        <PostButtonStyles type="submit">{btnText}</PostButtonStyles>
     )
 }
 
